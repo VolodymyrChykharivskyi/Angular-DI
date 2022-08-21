@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {ChangeDetectorRef, Compiler, Component, ComponentFactoryResolver, Injector, ViewChild, ViewContainerRef} from '@angular/core';
+import {LazyFeatureModule} from "./modules/lazy-feature/lazy-feature.module";
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,22 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'angular-di';
+  @ViewChild('lazyComponent', { read: ViewContainerRef }) public container!: ViewContainerRef;
+
+  constructor( private compiler: Compiler,
+               private injector: Injector,
+               private cd: ChangeDetectorRef) {}
+
+  showLazyComponent() {
+    import('./modules/lazy-feature/lazy-feature.module').then(({ LazyFeatureModule }) => {
+      this.compiler
+        .compileModuleAsync(LazyFeatureModule)
+        .then((moduleFactory) => {
+          const moduleReference = moduleFactory.create(this.injector);
+          const componentFactory = moduleReference.instance.resolveLazyloadedComponent();
+          this.container.createComponent( componentFactory, undefined, moduleReference.injector );
+          this.cd.detectChanges(); // tells change detection to refresh the view
+        });
+    });
+  }
 }
