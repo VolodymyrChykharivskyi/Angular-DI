@@ -1,4 +1,4 @@
-import {Component, Host, Optional, Self, SkipSelf} from '@angular/core';
+import {Component, ContentChild, Host, Optional, Self, SkipSelf, TemplateRef} from '@angular/core';
 import { MessageService } from "../../services/message.service";
 
 @Component({
@@ -8,6 +8,7 @@ import { MessageService } from "../../services/message.service";
   // viewProviders: [{ provide: MessageService, useValue: { message: 'viewProviders app-child' }}]
 })
 export class ChildComponent {
+  @ContentChild('content') public contentRef?: TemplateRef<void>;
 
   constructor(@Host() public messageService: MessageService) {}
 }
