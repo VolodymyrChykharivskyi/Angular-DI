@@ -4,7 +4,6 @@ import {LazyFeatureModule} from "./modules/lazy-feature/lazy-feature.module";
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   @ViewChild('lazyComponent', { read: ViewContainerRef }) public container!: ViewContainerRef;
