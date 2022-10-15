@@ -1,5 +1,6 @@
 import {ChangeDetectorRef, Compiler, Component, ComponentFactoryResolver, Injector, ViewChild, ViewContainerRef} from '@angular/core';
 import {LazyFeatureModule} from "./modules/lazy-feature/lazy-feature.module";
+import {InfoService} from "./services/info.service";
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,8 @@ export class AppComponent {
 
   constructor( private compiler: Compiler,
                private injector: Injector,
-               private cd: ChangeDetectorRef) {}
+               private cd: ChangeDetectorRef, private infoService: InfoService) {
+  }
 
   showLazyComponent() {
     import('./modules/lazy-feature/lazy-feature.module').then(({ LazyFeatureModule }) => {

@@ -2,7 +2,7 @@ import { ComponentFactory, ComponentFactoryResolver, NgModule } from '@angular/c
 import { CommonModule } from '@angular/common';
 import { LazyAomponentComponent } from './components/lazy-aomponent/lazy-aomponent.component';
 import {LazyFeatureRoutingModule} from "./lazy-feature-routing.module";
-import {InfoService} from "../people/modules/info/services/info.service";
+import {InfoService} from "../../services/info.service";
 
 @NgModule({
   declarations: [
